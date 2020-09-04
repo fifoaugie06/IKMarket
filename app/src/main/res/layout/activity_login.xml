@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    android:padding="52dp"
+    tools:context=".admin.LoginActivity">
+
+    <TextView
+        android:layout_marginTop="@dimen/margin_padding_16dp"
+        android:id="@+id/helloadmin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montserrat"
+        android:text="@string/helloadmin"
+        android:textAlignment="center"
+        android:textColor="@android:color/white"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvusername"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:fontFamily="@font/montserrat"
+        android:text="@string/username"
+        android:textColor="@android:color/white"
+        app:layout_constraintTop_toBottomOf="@+id/helloadmin" />
+
+    <EditText
+        android:id="@+id/edtusername"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="@dimen/margin_padding_12dp"
+        android:background="@drawable/bg_edittext"
+        app:layout_constraintTop_toBottomOf="@+id/tvusername"
+        tools:layout_editor_absoluteX="16dp" />
+
+    <TextView
+        android:id="@+id/tvpassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_padding_22dp"
+        android:fontFamily="@font/montserrat"
+        android:text="@string/password"
+        android:textColor="@android:color/white"
+        app:layout_constraintTop_toBottomOf="@+id/edtusername" />
+
+    <EditText
+        android:id="@+id/edtpassword"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="@dimen/margin_padding_12dp"
+        android:background="@drawable/bg_edittext"
+        android:inputType="textPassword"
+        app:layout_constraintTop_toBottomOf="@+id/tvpassword"
+        tools:layout_editor_absoluteX="16dp" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@drawable/bg_btn"
+        android:fontFamily="@font/montserrat"
+        android:text="@string/masuk"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edtpassword"
+        tools:layout_editor_absoluteX="52dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
