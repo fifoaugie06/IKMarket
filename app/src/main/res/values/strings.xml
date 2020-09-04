@@ -8,4 +8,5 @@
     <string name="password">Kata Sandi</string>
     <string name="masuk">Masuk</string>
     <string name="search">Masukkan Pencarian</string>
+    <string name="notfound">Record not found</string>
 </resources>

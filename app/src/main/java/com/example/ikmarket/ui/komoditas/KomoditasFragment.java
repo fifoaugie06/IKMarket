@@ -2,10 +2,14 @@ package com.example.ikmarket.ui.komoditas;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -33,18 +37,61 @@ public class KomoditasFragment extends Fragment {
     private ProgressDialog progress;
     private KomoditasAdapter adapter;
     private RecyclerView recyclerView;
+    private EditText edtsearch;
+    private TextView tvnull;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_komoditas, container, false);
 
+        tvnull = view.findViewById(R.id.tvnull);
+        edtsearch = view.findViewById(R.id.edtsearch);
         recyclerView = view.findViewById(R.id.rvKomoditas);
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(view.getContext(), 2);
         recyclerView.setLayoutManager(layoutManager);
 
         loadData();
 
+        edtsearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                filter(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
         return view;
+    }
+
+    private void filter(String params) {
+        List<Datum> dataProductList = new ArrayList<>();
+        try {
+            for (Datum s : responseProducts) {
+                if (s.getName().toLowerCase().contains(params.toLowerCase()) || s.getQuality().getName().toLowerCase().contains(params.toLowerCase())) {
+                    dataProductList.add(s);
+                }
+            }
+
+            if (dataProductList.size() == 0){
+                tvnull.setVisibility(View.VISIBLE);
+            }else {
+                tvnull.setVisibility(View.GONE);
+            }
+
+            adapter = new KomoditasAdapter(dataProductList);
+            recyclerView.setAdapter(adapter);
+        } catch (NullPointerException e) {
+            Log.i("e", String.valueOf(e));
+        }
     }
 
     private void loadData() {
@@ -57,7 +104,7 @@ public class KomoditasFragment extends Fragment {
         apiService.getProducts().enqueue(new Callback<ResponseProducts>() {
             @Override
             public void onResponse(Call<ResponseProducts> call, Response<ResponseProducts> response) {
-                if (response.isSuccessful()){
+                if (response.isSuccessful()) {
                     responseProducts = new ArrayList<>();
 
                     responseProducts.addAll(response.body().getData());
