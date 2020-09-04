@@ -4,8 +4,8 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiClient {
-    private static final String BASE_URL = "http://192.168.1.6/";
-    private static final String BASE_URL_API = BASE_URL + "api/";
+    private static final String BASE_URL = "https://ikmarket.faftech.my.id";
+    private static final String BASE_URL_API = BASE_URL + "/api/";
 
     private static Retrofit retrofit = null;
 

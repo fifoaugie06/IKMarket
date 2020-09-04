@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ikmarket.R;
@@ -36,6 +38,10 @@ public class KomoditasFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_komoditas, container, false);
 
+        recyclerView = view.findViewById(R.id.rvKomoditas);
+        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(view.getContext(), 2);
+        recyclerView.setLayoutManager(layoutManager);
+
         loadData();
 
         return view;
@@ -55,14 +61,10 @@ public class KomoditasFragment extends Fragment {
                     responseProducts = new ArrayList<>();
 
                     responseProducts.addAll(response.body().getData());
-
-                    Log.i("asd", response.body().getData().get(0).getName());
                 }
-
-                Log.i("asd", call.request().url().toString());
                 progress.dismiss();
-//                adapter = new KomoditasAdapter(responseProducts);
-//                recyclerView.setAdapter(adapter);
+                adapter = new KomoditasAdapter(responseProducts);
+                recyclerView.setAdapter(adapter);
             }
 
             @Override

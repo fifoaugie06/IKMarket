@@ -3,7 +3,7 @@ package com.example.ikmarket.model.product;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-class Quality {
+public class Quality {
 
     @SerializedName("id")
     @Expose

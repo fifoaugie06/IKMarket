@@ -1,17 +1,24 @@
 package com.example.ikmarket.adapter;
 
+import android.text.Html;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.ikmarket.R;
 import com.example.ikmarket.model.product.Datum;
 
 import java.util.List;
 
 public class KomoditasAdapter extends RecyclerView.Adapter<KomoditasAdapter.ViewHolder> {
     private List<Datum> responseProducts;
+    private View view;
+    private ImageView imgkomoditas;
 
     public KomoditasAdapter(List<Datum> responseProducts) {
         this.responseProducts = responseProducts;
@@ -20,22 +27,32 @@ public class KomoditasAdapter extends RecyclerView.Adapter<KomoditasAdapter.View
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return null;
+        view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_row_komoditas, parent, false);
+
+        return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-
+        holder.tvname.setText(responseProducts.get(position).getName());
+        holder.tvdesc.setText("Kualitas " + responseProducts.get(position).getQuality().getName());
+        holder.tvprice.setText("Rp " + responseProducts.get(position).getPrice() + "/" + responseProducts.get(position).getUnit().getShortname());
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return responseProducts.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
+        private TextView tvname, tvdesc, tvprice;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+
+            tvname = itemView.findViewById(R.id.tvname);
+            tvdesc = itemView.findViewById(R.id.tvdesc);
+            tvprice = itemView.findViewById(R.id.tvprice);
         }
     }
 }
