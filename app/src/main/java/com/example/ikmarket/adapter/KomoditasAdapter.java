@@ -10,10 +10,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.ikmarket.R;
 import com.example.ikmarket.model.product.Datum;
 
 import java.util.List;
+
+import static com.example.ikmarket.services.ApiClient.BASE_URL_STORAGE;
 
 public class KomoditasAdapter extends RecyclerView.Adapter<KomoditasAdapter.ViewHolder> {
     private List<Datum> responseProducts;
@@ -37,6 +40,10 @@ public class KomoditasAdapter extends RecyclerView.Adapter<KomoditasAdapter.View
         holder.tvname.setText(responseProducts.get(position).getName());
         holder.tvdesc.setText("Kualitas " + responseProducts.get(position).getQuality().getName());
         holder.tvprice.setText("Rp " + responseProducts.get(position).getPrice() + "/" + responseProducts.get(position).getUnit().getShortname());
+
+        Glide.with(view.getContext())
+                .load(BASE_URL_STORAGE + responseProducts.get(position).getImage())
+                .into(imgkomoditas);
     }
 
     @Override
@@ -53,6 +60,7 @@ public class KomoditasAdapter extends RecyclerView.Adapter<KomoditasAdapter.View
             tvname = itemView.findViewById(R.id.tvname);
             tvdesc = itemView.findViewById(R.id.tvdesc);
             tvprice = itemView.findViewById(R.id.tvprice);
+            imgkomoditas = itemView.findViewById(R.id.imgkomoditas);
         }
     }
 }

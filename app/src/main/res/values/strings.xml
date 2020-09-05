@@ -2,11 +2,13 @@
     <string name="app_name">IKMarket</string>
     <string name="title_home">Home</string>
     <string name="title_komoditas">Komoditas</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_market">Market</string>
     <string name="helloadmin">Hello Admin!</string>
     <string name="username">Nama Pengguna</string>
     <string name="password">Kata Sandi</string>
     <string name="masuk">Masuk</string>
     <string name="search">Masukkan Pencarian</string>
     <string name="notfound">Record not found</string>
+    <string name="detail">Detail</string>
+    <string name="lihatlokasi">Lihat Lokasi</string>
 </resources>

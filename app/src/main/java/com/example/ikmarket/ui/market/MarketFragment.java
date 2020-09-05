@@ -1,4 +1,4 @@
-package com.example.ikmarket.ui.komoditas;
+package com.example.ikmarket.ui.market;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
@@ -20,8 +20,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ikmarket.R;
 import com.example.ikmarket.adapter.KomoditasAdapter;
-import com.example.ikmarket.model.product.Datum;
-import com.example.ikmarket.model.product.ResponseProducts;
+import com.example.ikmarket.adapter.MarketAdapter;
+import com.example.ikmarket.model.market.Datum;
+import com.example.ikmarket.model.market.ResponseMarket;
 import com.example.ikmarket.services.ApiClient;
 import com.example.ikmarket.services.ApiService;
 
@@ -32,23 +33,23 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class KomoditasFragment extends Fragment {
+public class MarketFragment extends Fragment {
     private View view;
-    private List<Datum> responseProducts;
+    private List<Datum> responseMarkets;
     private ProgressDialog progress;
-    private KomoditasAdapter adapter;
+    private MarketAdapter adapter;
     private RecyclerView recyclerView;
     private EditText edtsearch;
     private TextView tvnull;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_komoditas, container, false);
+        view = inflater.inflate(R.layout.fragment_market, container, false);
 
         tvnull = view.findViewById(R.id.tvnull);
         edtsearch = view.findViewById(R.id.edtsearch);
-        recyclerView = view.findViewById(R.id.rvKomoditas);
-        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(view.getContext(), 2);
+        recyclerView = view.findViewById(R.id.rvMarket);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(view.getContext());
         recyclerView.setLayoutManager(layoutManager);
 
         loadData();
@@ -74,26 +75,27 @@ public class KomoditasFragment extends Fragment {
     }
 
     private void filter(String params) {
-        List<Datum> dataProductList = new ArrayList<>();
+        List<Datum> dataMarketList = new ArrayList<>();
         try {
-            for (Datum s : responseProducts) {
-                if (s.getName().toLowerCase().contains(params.toLowerCase()) || s.getQuality().getName().toLowerCase().contains(params.toLowerCase())) {
-                    dataProductList.add(s);
+            for (Datum s : responseMarkets) {
+                if (s.getName().toLowerCase().contains(params.toLowerCase())) {
+                    dataMarketList.add(s);
                 }
             }
 
-            if (dataProductList.size() == 0){
+            if (dataMarketList.size() == 0){
                 tvnull.setVisibility(View.VISIBLE);
             }else {
                 tvnull.setVisibility(View.GONE);
             }
 
-            adapter = new KomoditasAdapter(dataProductList);
+            adapter = new MarketAdapter(dataMarketList);
             recyclerView.setAdapter(adapter);
         } catch (NullPointerException e) {
             Log.i("e", String.valueOf(e));
         }
     }
+
 
     private void loadData() {
         progress = new ProgressDialog(view.getContext());
@@ -102,21 +104,21 @@ public class KomoditasFragment extends Fragment {
         progress.show();
 
         ApiService apiService = ApiClient.getClient().create(ApiService.class);
-        apiService.getProducts().enqueue(new Callback<ResponseProducts>() {
+        apiService.getMarket().enqueue(new Callback<ResponseMarket>() {
             @Override
-            public void onResponse(Call<ResponseProducts> call, Response<ResponseProducts> response) {
+            public void onResponse(Call<ResponseMarket> call, Response<ResponseMarket> response) {
                 if (response.isSuccessful()) {
-                    responseProducts = new ArrayList<>();
+                    responseMarkets = new ArrayList<>();
 
-                    responseProducts.addAll(response.body().getData());
+                    responseMarkets.addAll(response.body().getData());
                 }
                 progress.dismiss();
-                adapter = new KomoditasAdapter(responseProducts);
+                adapter = new MarketAdapter(responseMarkets);
                 recyclerView.setAdapter(adapter);
             }
 
             @Override
-            public void onFailure(Call<ResponseProducts> call, Throwable t) {
+            public void onFailure(Call<ResponseMarket> call, Throwable t) {
                 Toast.makeText(view.getContext(), "Jaringan Error", Toast.LENGTH_SHORT).show();
                 progress.dismiss();
             }

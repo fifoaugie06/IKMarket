@@ -6,6 +6,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ApiClient {
     private static final String BASE_URL = "https://ikmarket.faftech.my.id";
     private static final String BASE_URL_API = BASE_URL + "/api/";
+    public static final String BASE_URL_STORAGE = BASE_URL + "/storage/";
 
     private static Retrofit retrofit = null;
 

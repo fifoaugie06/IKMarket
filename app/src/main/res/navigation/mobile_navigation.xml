@@ -18,8 +18,8 @@
         tools:layout="@layout/fragment_komoditas" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.example.ikmarket.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:id="@+id/navigation_market"
+        android:name="com.example.ikmarket.ui.market.MarketFragment"
+        android:label="@string/title_market"
+        tools:layout="@layout/fragment_market" />
 </navigation>
