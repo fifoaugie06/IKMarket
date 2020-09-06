@@ -11,4 +11,13 @@
     <string name="notfound">Record not found</string>
     <string name="detail">Detail</string>
     <string name="lihatlokasi">Lihat Lokasi</string>
+    <string name="admin_login">Login Admin</string>
+    <string name="haiadmin">Hai Admin!</string>
+    <string name="logout">Logout</string>
+    <string name="product">Product</string>
+    <string name="lainnya">Lainnya</string>
+    <string name="add">Add</string>
+    <string name="namaproduct">Nama Product</string>
+    <string name="price">Harga</string>
+    <string name="tambahkomoditas">Tambah Komoditas</string>
 </resources>
