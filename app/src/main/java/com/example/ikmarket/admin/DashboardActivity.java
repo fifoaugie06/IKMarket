@@ -1,17 +1,24 @@
 package com.example.ikmarket.admin;
 
+
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.ikmarket.MainActivity;
 import com.example.ikmarket.R;
 import com.example.ikmarket.adapter.KomoditasAdapter;
 import com.example.ikmarket.adapter.MarketAdapter;
@@ -28,8 +35,11 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.example.ikmarket.admin.LoginActivity.ISLOGIN;
+import static com.example.ikmarket.admin.LoginActivity.SHARED_PREFS;
+
 public class DashboardActivity extends AppCompatActivity {
-    private TextView tvGreeting, tvCountKomoditas, tvCountMarket, btnLogout;
+    private TextView tvGreeting, tvCountKomoditas, tvCountMarket, btnLogout, btnKomoditasLainnya, btnMarketLainnya;
     private ApiService apiService;
     private ProgressDialog progress;
     private KomoditasAdapter komoditasAdapter;
@@ -47,6 +57,8 @@ public class DashboardActivity extends AppCompatActivity {
         tvCountMarket = findViewById(R.id.tvcountmarket);
         btnAddKomoditas = findViewById(R.id.btnaddkomoditas);
         btnLogout = findViewById(R.id.btnlogout);
+        btnKomoditasLainnya = findViewById(R.id.tvlainnya);
+        btnMarketLainnya = findViewById(R.id.tvlainnya2);
 
         recyclerView = findViewById(R.id.rvKomoditas);
         recyclerView2 = findViewById(R.id.rvMarket);
@@ -69,10 +81,34 @@ public class DashboardActivity extends AppCompatActivity {
         loadDataMarket();
 
         btnAddKomoditas.setOnClickListener(v -> startActivity(new Intent(DashboardActivity.this, TambahKomoditasActivity.class)));
+        btnKomoditasLainnya.setOnClickListener(v -> {
+            startActivity(new Intent(DashboardActivity.this, KomoditasActivity.class));
+            finish();
+        });
+        btnMarketLainnya.setOnClickListener(v -> {
+            startActivity(new Intent(DashboardActivity.this, MarketActivity.class));
+            finish();
+        });
 
-//        btnLogout.setOnClickListener(v ->
-//
-//        );
+        SharedPreferences preferences = getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
+        btnLogout.setOnClickListener(v -> {
+            AlertDialog.Builder builder = new AlertDialog.Builder(DashboardActivity.this);
+            builder.setCancelable(true);
+            builder.setTitle("Konfirmasi");
+            builder.setMessage("Anda yakin keluar dari Admin ?");
+            builder.setPositiveButton("Confirm", (dialog, which) -> {
+                preferences.edit().remove(ISLOGIN).apply();
+
+                startActivity(new Intent(DashboardActivity.this, MainActivity.class));
+                finish();
+            });
+            builder.setNegativeButton(android.R.string.cancel, (dialog, which) -> {
+
+            });
+
+            AlertDialog dlg = builder.create();
+            dlg.show();
+        });
 
         getSupportActionBar().hide();
     }
@@ -125,10 +161,11 @@ public class DashboardActivity extends AppCompatActivity {
 
                 if (responseProducts.size() >= 3) {
                     komoditasAdapter = new KomoditasAdapter(responseProducts.subList(0, 3));
-                }else {
+                } else {
                     komoditasAdapter = new KomoditasAdapter(responseProducts);
                 }
                 recyclerView.setAdapter(komoditasAdapter);
+                komoditasAdapter.notifyDataSetChanged();
             }
 
             @Override

@@ -20,4 +20,6 @@
     <string name="namaproduct">Nama Product</string>
     <string name="price">Harga</string>
     <string name="tambahkomoditas">Tambah Komoditas</string>
+    <string name="update">Update</string>
+    <string name="delete">Delete</string>
 </resources>

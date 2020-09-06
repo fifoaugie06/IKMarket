@@ -21,7 +21,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".admin.TambahKomoditasActivity"></activity>
+        <activity android:name=".admin.MarketActivity"></activity>
+        <activity android:name=".admin.KomoditasActivity" />
+        <activity android:name=".admin.TambahKomoditasActivity" />
         <activity android:name=".admin.DashboardActivity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -46,13 +48,7 @@
         <activity android:name=".MapsActivity" />
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:label="@string/app_name" />
 
         <meta-data
             android:name="preloaded_fonts"

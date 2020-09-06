@@ -4,7 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:clickable="true"
     android:elevation="2dp"
+    android:focusable="true"
+    android:foreground="?android:attr/selectableItemBackground"
     app:cardCornerRadius="@dimen/margin_padding_8dp"
     app:cardUseCompatPadding="true">
 
@@ -68,10 +71,10 @@
                     android:layout_marginEnd="@dimen/margin_padding_22dp"
                     android:layout_marginBottom="@dimen/margin_padding_4dp"
                     android:fontFamily="@font/montserrat"
+                    android:text="@string/lihatlokasi"
                     android:textAllCaps="true"
                     android:textColor="@android:color/black"
-                    android:textSize="12sp"
-                    android:text="@string/lihatlokasi" />
+                    android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/tvdetail"
@@ -80,10 +83,10 @@
                     android:layout_marginTop="@dimen/margin_padding_4dp"
                     android:layout_marginBottom="@dimen/margin_padding_4dp"
                     android:fontFamily="@font/montserrat"
+                    android:text="@string/detail"
                     android:textAllCaps="true"
                     android:textColor="@android:color/black"
-                    android:textSize="12sp"
-                    android:text="@string/detail" />
+                    android:textSize="12sp" />
 
             </LinearLayout>
         </LinearLayout>
