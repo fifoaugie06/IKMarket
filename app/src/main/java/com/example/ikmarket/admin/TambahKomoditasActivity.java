@@ -4,6 +4,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.Manifest;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.database.Cursor;
@@ -12,11 +13,14 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -50,6 +54,7 @@ public class TambahKomoditasActivity extends AppCompatActivity {
     private ImageView imgKomoditas;
     private String mediaPath;
     private Button btnTambahKomoditas;
+    private ImageButton btnTambahQuality;
     private int selectTypeCode, selectQualityCode, selectUnitCode;
     private EditText edtNamaProduct, edtHarga;
 
@@ -67,6 +72,7 @@ public class TambahKomoditasActivity extends AppCompatActivity {
         btnTambahKomoditas = findViewById(R.id.tambahkomoditas);
         edtNamaProduct = findViewById(R.id.edtnamaproduct);
         edtHarga = findViewById(R.id.edtharga);
+        btnTambahQuality = findViewById(R.id.btntambahquality);
 
         dialog = new ProgressDialog(this);
         dialog.setCancelable(false);
@@ -77,6 +83,33 @@ public class TambahKomoditasActivity extends AppCompatActivity {
         loadSpinnerType();
         loadSpinnerQuality();
         loadSpinnerUnit();
+
+        btnTambahQuality.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Dialog dial;
+                dial = new Dialog(TambahKomoditasActivity.this);
+                dial.setContentView(R.layout.dialog_create_quality);
+                dial.show();
+                final Button btnTambah = dial.findViewById(R.id.btnadd);
+                final EditText edtName = dial.findViewById(R.id.edtname);
+
+                Window window = dial.getWindow();
+                window.setLayout(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+
+                btnTambah.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (edtName.getText().length() == 0){
+                            edtName.setError("Wajib diisi");
+                        }else {
+                            tambahQuality(edtName.getText().toString());
+                            dial.dismiss();
+                        }
+                    }
+                });
+            }
+        });
 
         imgKomoditas.setOnClickListener(v -> {
             String[] galleryPermissions = {Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE};
@@ -134,6 +167,32 @@ public class TambahKomoditasActivity extends AppCompatActivity {
                         selectQualityCode, selectUnitCode);
             }else {
                 Toast.makeText(TambahKomoditasActivity.this, "Isi Semua Data", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void tambahQuality(String qualityname) {
+        dialog.show();
+
+        apiService = ApiClient.getClient().create(ApiService.class);
+        apiService.createQuality(qualityname).enqueue(new Callback<ResponseGeneral>() {
+            @Override
+            public void onResponse(Call<ResponseGeneral> call, Response<ResponseGeneral> response) {
+                if (response.isSuccessful()){
+                    Toast.makeText(TambahKomoditasActivity.this, "Kualitas Baru Ditambahkan", Toast.LENGTH_SHORT).show();
+
+                    finish();
+                    overridePendingTransition(0, 0);
+                    startActivity(getIntent());
+                    overridePendingTransition(0, 0);
+                }
+                dialog.dismiss();
+            }
+
+            @Override
+            public void onFailure(Call<ResponseGeneral> call, Throwable t) {
+                Toast.makeText(TambahKomoditasActivity.this, "Jaringan Error", Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
             }
         });
     }

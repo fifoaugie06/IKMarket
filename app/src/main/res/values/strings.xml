@@ -22,4 +22,6 @@
     <string name="tambahkomoditas">Tambah Komoditas</string>
     <string name="update">Update</string>
     <string name="delete">Delete</string>
+    <string name="tambah">Tambah</string>
+    <string name="name_quality">Nama Kualitas</string>
 </resources>

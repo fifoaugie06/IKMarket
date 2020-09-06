@@ -40,6 +40,12 @@ public interface ApiService {
       @Path("id") String id
     );
 
+    @FormUrlEncoded
+    @POST("quality")
+    Call<ResponseGeneral> createQuality(
+            @Field("name") String name
+    );
+
     @GET("markets")
     Call<ResponseMarket> getMarket();
 

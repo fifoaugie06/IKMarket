@@ -3,6 +3,7 @@ package com.example.ikmarket.adapter;
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,7 +40,6 @@ public class MarketAdminAdapter extends RecyclerView.Adapter<MarketAdminAdapter.
     private View view;
     private ImageView imgmarkets;
     private ApiService apiService;
-    private ProgressDialog progress;
 
     public MarketAdminAdapter(List<Datum> responseMarkets) {
         this.responseMarkets = responseMarkets;
@@ -93,24 +93,30 @@ public class MarketAdminAdapter extends RecyclerView.Adapter<MarketAdminAdapter.
                     builder.setCancelable(true);
                     builder.setTitle("Konfirmasi");
                     builder.setMessage("Anda yakin Menghapus data berikut ?");
-                    builder.setPositiveButton("Confirm", (dialog1, which) -> {
-                        deleteMarkets(responseMarkets.get(position).getId());
+                    builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            deleteMarkets(responseMarkets.get(position).getId());
+                        }
                     });
-                    builder.setNegativeButton(android.R.string.cancel, (dialog1, which) -> {
+                    builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
 
+                        }
                     });
 
                     AlertDialog dlg = builder.create();
                     dlg.show();
                 });
 
-                return true;
+                return false;
             }
         });
     }
 
     private void deleteMarkets(Integer id) {
-        progress = new ProgressDialog(view.getContext());
+        ProgressDialog progress = new ProgressDialog(view.getContext());
         progress.setCancelable(false);
         progress.setMessage("Loading ...");
         progress.show();
@@ -119,17 +125,20 @@ public class MarketAdminAdapter extends RecyclerView.Adapter<MarketAdminAdapter.
         apiService.deleteMarkets(String.valueOf(id)).enqueue(new Callback<ResponseGeneral>() {
             @Override
             public void onResponse(Call<ResponseGeneral> call, Response<ResponseGeneral> response) {
-                Toast.makeText(view.getContext(), "Berhasil Dihapus", Toast.LENGTH_SHORT).show();
+                if (response.isSuccessful()){
+                    Toast.makeText(view.getContext(), "Berhasil Dihapus", Toast.LENGTH_SHORT).show();
 
-                ((Activity)view.getContext()).finish();
-                ((Activity) view.getContext()).overridePendingTransition(0,0);
-                view.getContext().startActivity(((Activity) view.getContext()).getIntent());
-                ((Activity) view.getContext()).overridePendingTransition(0,0);
+                    ((Activity)view.getContext()).finish();
+                    ((Activity) view.getContext()).overridePendingTransition(0,0);
+                    view.getContext().startActivity(((Activity) view.getContext()).getIntent());
+                    ((Activity) view.getContext()).overridePendingTransition(0,0);
+                }
+                progress.dismiss();
             }
 
             @Override
             public void onFailure(Call<ResponseGeneral> call, Throwable t) {
-
+                progress.dismiss();
             }
         });
     }

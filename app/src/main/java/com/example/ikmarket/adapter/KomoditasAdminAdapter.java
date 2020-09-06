@@ -3,6 +3,7 @@ package com.example.ikmarket.adapter;
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,7 +42,6 @@ public class KomoditasAdminAdapter extends RecyclerView.Adapter<KomoditasAdminAd
     private View view;
     private ImageView imgkomoditas;
     private ApiService apiService;
-    private ProgressDialog progress;
 
     public KomoditasAdminAdapter(List<Datum> responseProducts) {
         this.responseProducts = responseProducts;
@@ -66,40 +66,46 @@ public class KomoditasAdminAdapter extends RecyclerView.Adapter<KomoditasAdminAd
                 .into(imgkomoditas);
 
         holder.itemView.setOnLongClickListener(v -> {
-            final Dialog dialog;
-            dialog = new Dialog(view.getContext());
-            dialog.setContentView(R.layout.dialog_update_delete);
-            dialog.show();
-            final Button btnUpdate = dialog.findViewById(R.id.btnupdate);
-            final Button btnDelete = dialog.findViewById(R.id.btndelete);
+            final Dialog dial;
+            dial = new Dialog(view.getContext());
+            dial.setContentView(R.layout.dialog_update_delete);
+            dial.show();
+            final Button btnUpdate = dial.findViewById(R.id.btnupdate);
+            final Button btnDelete = dial.findViewById(R.id.btndelete);
 
-            Window window = dialog.getWindow();
+            Window window = dial.getWindow();
             window.setLayout(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 
             btnDelete.setOnClickListener(v1 -> {
-                dialog.dismiss();
+                dial.dismiss();
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
                 builder.setCancelable(true);
                 builder.setTitle("Konfirmasi");
                 builder.setMessage("Anda yakin Menghapus data berikut ?");
-                builder.setPositiveButton("Confirm", (dialog1, which) -> {
-                    deleteProducts(responseProducts.get(position).getId());
+                builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        deleteProducts(responseProducts.get(position).getId());
+                    }
                 });
-                builder.setNegativeButton(android.R.string.cancel, (dialog1, which) -> {
+                builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
 
+                    }
                 });
 
                 AlertDialog dlg = builder.create();
                 dlg.show();
             });
 
-            return true;
+            return false;
         });
     }
 
     private void deleteProducts(Integer id) {
-        progress = new ProgressDialog(view.getContext());
+        ProgressDialog progress = new ProgressDialog(view.getContext());
         progress.setCancelable(false);
         progress.setMessage("Loading ...");
         progress.show();
@@ -116,11 +122,12 @@ public class KomoditasAdminAdapter extends RecyclerView.Adapter<KomoditasAdminAd
                     view.getContext().startActivity(((Activity) view.getContext()).getIntent());
                     ((Activity) view.getContext()).overridePendingTransition(0,0);
                 }
+                progress.dismiss();
             }
 
             @Override
             public void onFailure(Call<ResponseGeneral> call, Throwable t) {
-
+                progress.dismiss();
             }
         });
     }

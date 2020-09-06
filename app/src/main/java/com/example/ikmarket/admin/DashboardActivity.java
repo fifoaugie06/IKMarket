@@ -78,7 +78,6 @@ public class DashboardActivity extends AppCompatActivity {
         progress.setMessage("Loading ...");
 
         loadDataKomoditas();
-        loadDataMarket();
 
         btnAddKomoditas.setOnClickListener(v -> startActivity(new Intent(DashboardActivity.this, TambahKomoditasActivity.class)));
         btnKomoditasLainnya.setOnClickListener(v -> {
@@ -156,7 +155,8 @@ public class DashboardActivity extends AppCompatActivity {
                     tvCountKomoditas.setText(String.valueOf(response.body().getDataCount()));
 
                     responseProducts.addAll(response.body().getData());
-                    progress.dismiss();
+
+                    loadDataMarket();
                 }
 
                 if (responseProducts.size() >= 3) {
