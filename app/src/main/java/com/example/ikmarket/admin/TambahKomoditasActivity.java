@@ -12,12 +12,16 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.ikmarket.R;
+import com.example.ikmarket.model.ResponseGeneral;
 import com.example.ikmarket.model.type.Datum;
 import com.example.ikmarket.model.type.ResponseType;
 import com.example.ikmarket.model.unit.ResponseUnit;
@@ -25,9 +29,13 @@ import com.example.ikmarket.quality.ResponseQuality;
 import com.example.ikmarket.services.ApiClient;
 import com.example.ikmarket.services.ApiService;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import pub.devrel.easypermissions.EasyPermissions;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -41,6 +49,9 @@ public class TambahKomoditasActivity extends AppCompatActivity {
     private List<Integer> spinnerCodeType, spinnerCodeQuality, spinnerCodeUnit;
     private ImageView imgKomoditas;
     private String mediaPath;
+    private Button btnTambahKomoditas;
+    private int selectTypeCode, selectQualityCode, selectUnitCode;
+    private EditText edtNamaProduct, edtHarga;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +64,9 @@ public class TambahKomoditasActivity extends AppCompatActivity {
         spinnerQuality = findViewById(R.id.spinnerquality);
         spinnerUnit = findViewById(R.id.spinnerunit);
         imgKomoditas = findViewById(R.id.imgKomoditas);
+        btnTambahKomoditas = findViewById(R.id.tambahkomoditas);
+        edtNamaProduct = findViewById(R.id.edtnamaproduct);
+        edtHarga = findViewById(R.id.edtharga);
 
         dialog = new ProgressDialog(this);
         dialog.setCancelable(false);
@@ -73,6 +87,90 @@ public class TambahKomoditasActivity extends AppCompatActivity {
             } else {
                 EasyPermissions.requestPermissions(this, "Access for storage",
                         101, galleryPermissions);
+            }
+        });
+
+        spinnerType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                selectTypeCode = spinnerCodeType.get(position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        spinnerQuality.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                selectQualityCode = spinnerCodeQuality.get(position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        spinnerUnit.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                selectUnitCode = spinnerCodeUnit.get(position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        btnTambahKomoditas.setOnClickListener(v -> {
+//            Toast.makeText(TambahKomoditasActivity.this, selectTypeCode + " " + selectQualityCode + " " + selectUnitCode, Toast.LENGTH_LONG).show();
+            if (mediaPath != null && selectTypeCode != 0 && selectQualityCode != 0 && selectUnitCode != 0
+                    && edtNamaProduct != null && edtHarga != null){
+                tambahKomoditas(edtNamaProduct.getText().toString(), selectTypeCode, edtHarga.getText().toString(),
+                        selectQualityCode, selectUnitCode);
+            }else {
+                Toast.makeText(TambahKomoditasActivity.this, "Isi Semua Data", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void tambahKomoditas(String nama, int selectTypeCode, String hrg, int selectQualityCode, int selectUnitCode) {
+        dialog.show();
+
+        File file = new File(mediaPath);
+
+        RequestBody requestBody = RequestBody.create(MediaType.parse("*/*"), file);
+        MultipartBody.Part fileToUpload = MultipartBody.Part.createFormData("image", file.getName(), requestBody);
+        RequestBody filename = RequestBody.create(MediaType.parse("text/plain"), file.getName());
+        RequestBody namaKomoditas = RequestBody.create(MediaType.parse("text/plain"), nama);
+        RequestBody selectType = RequestBody.create(MediaType.parse("text/plain"), String.valueOf(selectTypeCode));
+        RequestBody harga = RequestBody.create(MediaType.parse("text/plain"), hrg);
+        RequestBody selectQuality = RequestBody.create(MediaType.parse("text/plain"), String.valueOf(selectQualityCode));
+        RequestBody selectUnit = RequestBody.create(MediaType.parse("text/plain"), String.valueOf(selectUnitCode));
+
+        apiService = ApiClient.getClient().create(ApiService.class);
+        apiService.createProducts(fileToUpload, filename, namaKomoditas, selectType, harga, selectQuality, selectUnit).enqueue(new Callback<ResponseGeneral>() {
+            @Override
+            public void onResponse(Call<ResponseGeneral> call, Response<ResponseGeneral> response) {
+                if (response.isSuccessful()){
+                    Toast.makeText(TambahKomoditasActivity.this, "Komoditas Baru Ditambahkan", Toast.LENGTH_SHORT).show();
+
+                    startActivity(new Intent(TambahKomoditasActivity.this, DashboardActivity.class));
+                    finish();
+                }else if (response.code() == 400){
+                    Toast.makeText(TambahKomoditasActivity.this, "Gambar melebihi 2Mb", Toast.LENGTH_SHORT).show();
+                }
+                dialog.dismiss();
+            }
+
+            @Override
+            public void onFailure(Call<ResponseGeneral> call, Throwable t) {
+                Toast.makeText(TambahKomoditasActivity.this, "Jaringan Error", Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
             }
         });
     }

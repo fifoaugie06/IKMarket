@@ -29,7 +29,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class DashboardActivity extends AppCompatActivity {
-    private TextView tvGreeting, tvCountKomoditas, tvCountMarket;
+    private TextView tvGreeting, tvCountKomoditas, tvCountMarket, btnLogout;
     private ApiService apiService;
     private ProgressDialog progress;
     private KomoditasAdapter komoditasAdapter;
@@ -46,6 +46,7 @@ public class DashboardActivity extends AppCompatActivity {
         tvCountKomoditas = findViewById(R.id.tvcountproduct);
         tvCountMarket = findViewById(R.id.tvcountmarket);
         btnAddKomoditas = findViewById(R.id.btnaddkomoditas);
+        btnLogout = findViewById(R.id.btnlogout);
 
         recyclerView = findViewById(R.id.rvKomoditas);
         recyclerView2 = findViewById(R.id.rvMarket);
@@ -68,6 +69,10 @@ public class DashboardActivity extends AppCompatActivity {
         loadDataMarket();
 
         btnAddKomoditas.setOnClickListener(v -> startActivity(new Intent(DashboardActivity.this, TambahKomoditasActivity.class)));
+
+//        btnLogout.setOnClickListener(v ->
+//
+//        );
 
         getSupportActionBar().hide();
     }
