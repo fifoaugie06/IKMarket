@@ -82,9 +82,9 @@ public class KomoditasActivity extends AppCompatActivity {
                 }
             }
 
-            if (dataProductList.size() == 0){
+            if (dataProductList.size() == 0) {
                 tvnull.setVisibility(View.VISIBLE);
-            }else {
+            } else {
                 tvnull.setVisibility(View.GONE);
             }
 

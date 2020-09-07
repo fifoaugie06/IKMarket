@@ -82,9 +82,9 @@ public class KomoditasFragment extends Fragment {
                 }
             }
 
-            if (dataProductList.size() == 0){
+            if (dataProductList.size() == 0) {
                 tvnull.setVisibility(View.VISIBLE);
-            }else {
+            } else {
                 tvnull.setVisibility(View.GONE);
             }
 

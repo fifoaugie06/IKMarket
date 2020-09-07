@@ -21,7 +21,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".admin.MarketActivity"></activity>
+        <activity android:name=".admin.TambahMarketActivity"></activity>
+        <activity android:name=".admin.MarketActivity" />
         <activity android:name=".admin.KomoditasActivity" />
         <activity android:name=".admin.TambahKomoditasActivity" />
         <activity android:name=".admin.DashboardActivity" />

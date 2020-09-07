@@ -14,12 +14,10 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ikmarket.R;
-import com.example.ikmarket.adapter.KomoditasAdapter;
 import com.example.ikmarket.adapter.MarketAdapter;
 import com.example.ikmarket.model.market.Datum;
 import com.example.ikmarket.model.market.ResponseMarket;
@@ -83,9 +81,9 @@ public class MarketFragment extends Fragment {
                 }
             }
 
-            if (dataMarketList.size() == 0){
+            if (dataMarketList.size() == 0) {
                 tvnull.setVisibility(View.VISIBLE);
-            }else {
+            } else {
                 tvnull.setVisibility(View.GONE);
             }
 

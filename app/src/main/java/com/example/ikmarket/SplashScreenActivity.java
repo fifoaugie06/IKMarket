@@ -29,7 +29,7 @@ public class SplashScreenActivity extends AppCompatActivity {
 
             if (stateLogin) {
                 startActivity(new Intent(SplashScreenActivity.this, DashboardActivity.class));
-            }else {
+            } else {
                 startActivity(new Intent(SplashScreenActivity.this, MainActivity.class));
             }
             finish();

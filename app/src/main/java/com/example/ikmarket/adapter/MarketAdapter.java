@@ -64,6 +64,7 @@ public class MarketAdapter extends RecyclerView.Adapter<MarketAdapter.ViewHolder
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         private TextView tvname, tvopen, tvdesc, tvlihatlokasi, tvdetail;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 

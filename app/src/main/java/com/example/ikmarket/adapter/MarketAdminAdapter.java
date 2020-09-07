@@ -39,7 +39,6 @@ public class MarketAdminAdapter extends RecyclerView.Adapter<MarketAdminAdapter.
     private List<Datum> responseMarkets;
     private View view;
     private ImageView imgmarkets;
-    private ApiService apiService;
 
     public MarketAdminAdapter(List<Datum> responseMarkets) {
         this.responseMarkets = responseMarkets;
@@ -73,45 +72,42 @@ public class MarketAdminAdapter extends RecyclerView.Adapter<MarketAdminAdapter.
             view.getContext().startActivity(intent);
         });
 
-        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                final Dialog dialog;
-                dialog = new Dialog(view.getContext());
-                dialog.setContentView(R.layout.dialog_update_delete);
-                dialog.show();
-                final Button btnUpdate = dialog.findViewById(R.id.btnupdate);
-                final Button btnDelete = dialog.findViewById(R.id.btndelete);
+        holder.itemView.setOnLongClickListener(v -> {
+            final Dialog dialog;
+            dialog = new Dialog(view.getContext());
+            dialog.setContentView(R.layout.dialog_update_delete);
+            dialog.show();
+            final Button btnUpdate = dialog.findViewById(R.id.btnupdate);
+            final Button btnDelete = dialog.findViewById(R.id.btndelete);
 
-                Window window = dialog.getWindow();
-                window.setLayout(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            Window window = dialog.getWindow();
+            window.setLayout(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 
-                btnDelete.setOnClickListener(v1 -> {
-                    dialog.dismiss();
+            btnDelete.setOnClickListener(v1 -> {
+                dialog.dismiss();
 
-                    AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
-                    builder.setCancelable(true);
-                    builder.setTitle("Konfirmasi");
-                    builder.setMessage("Anda yakin Menghapus data berikut ?");
-                    builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            deleteMarkets(responseMarkets.get(position).getId());
-                        }
-                    });
-                    builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+                builder.setCancelable(true);
+                builder.setTitle("Konfirmasi");
+                builder.setMessage("Anda yakin Menghapus data berikut ?");
+                builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        deleteMarkets(responseMarkets.get(position).getId());
+                    }
+                });
+                builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
 
-                        }
-                    });
-
-                    AlertDialog dlg = builder.create();
-                    dlg.show();
+                    }
                 });
 
-                return false;
-            }
+                AlertDialog dlg = builder.create();
+                dlg.show();
+            });
+
+            return false;
         });
     }
 
@@ -121,7 +117,7 @@ public class MarketAdminAdapter extends RecyclerView.Adapter<MarketAdminAdapter.
         progress.setMessage("Loading ...");
         progress.show();
 
-        apiService = ApiClient.getClient().create(ApiService.class);
+        ApiService apiService = ApiClient.getClient().create(ApiService.class);
         apiService.deleteMarkets(String.valueOf(id)).enqueue(new Callback<ResponseGeneral>() {
             @Override
             public void onResponse(Call<ResponseGeneral> call, Response<ResponseGeneral> response) {

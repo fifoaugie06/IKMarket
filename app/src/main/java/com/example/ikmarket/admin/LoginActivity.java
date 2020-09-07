@@ -66,7 +66,7 @@ public class LoginActivity extends AppCompatActivity {
             apiService.auth(edtusername.getText().toString(), edtpassword.getText().toString()).enqueue(new Callback<ResponseGeneral>() {
                 @Override
                 public void onResponse(Call<ResponseGeneral> call, Response<ResponseGeneral> response) {
-                    if (response.isSuccessful()){
+                    if (response.isSuccessful()) {
                         Toast.makeText(LoginActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
 
                         Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
@@ -76,7 +76,7 @@ public class LoginActivity extends AppCompatActivity {
 
                         startActivity(intent);
                         finish();
-                    }else{
+                    } else {
                         Toast.makeText(LoginActivity.this, "Username atau Password Salah", Toast.LENGTH_SHORT).show();
                     }
 

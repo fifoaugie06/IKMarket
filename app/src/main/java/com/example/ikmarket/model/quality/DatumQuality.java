@@ -1,4 +1,4 @@
-package com.example.ikmarket.quality;
+package com.example.ikmarket.model.quality;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

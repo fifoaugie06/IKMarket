@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,9 +19,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.ikmarket.MainActivity;
 import com.example.ikmarket.R;
-import com.example.ikmarket.admin.DashboardActivity;
 import com.example.ikmarket.model.ResponseGeneral;
 import com.example.ikmarket.model.product.Datum;
 import com.example.ikmarket.services.ApiClient;
@@ -34,14 +31,12 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static com.example.ikmarket.admin.LoginActivity.ISLOGIN;
 import static com.example.ikmarket.services.ApiClient.BASE_URL_STORAGE;
 
 public class KomoditasAdminAdapter extends RecyclerView.Adapter<KomoditasAdminAdapter.ViewHolder> {
     private List<Datum> responseProducts;
     private View view;
     private ImageView imgkomoditas;
-    private ApiService apiService;
 
     public KomoditasAdminAdapter(List<Datum> responseProducts) {
         this.responseProducts = responseProducts;
@@ -110,17 +105,17 @@ public class KomoditasAdminAdapter extends RecyclerView.Adapter<KomoditasAdminAd
         progress.setMessage("Loading ...");
         progress.show();
 
-        apiService = ApiClient.getClient().create(ApiService.class);
+        ApiService apiService = ApiClient.getClient().create(ApiService.class);
         apiService.deleteProducts(String.valueOf(id)).enqueue(new Callback<ResponseGeneral>() {
             @Override
             public void onResponse(Call<ResponseGeneral> call, Response<ResponseGeneral> response) {
-                if (response.isSuccessful()){
+                if (response.isSuccessful()) {
                     Toast.makeText(view.getContext(), "Berhasil Dihapus", Toast.LENGTH_SHORT).show();
 
-                    ((Activity)view.getContext()).finish();
-                    ((Activity) view.getContext()).overridePendingTransition(0,0);
+                    ((Activity) view.getContext()).finish();
+                    ((Activity) view.getContext()).overridePendingTransition(0, 0);
                     view.getContext().startActivity(((Activity) view.getContext()).getIntent());
-                    ((Activity) view.getContext()).overridePendingTransition(0,0);
+                    ((Activity) view.getContext()).overridePendingTransition(0, 0);
                 }
                 progress.dismiss();
             }

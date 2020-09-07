@@ -1,6 +1,5 @@
 package com.example.ikmarket.admin;
 
-
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
@@ -9,12 +8,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
-import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,7 +42,7 @@ public class DashboardActivity extends AppCompatActivity {
     private KomoditasAdapter komoditasAdapter;
     private MarketAdapter marketsAdapter;
     private RecyclerView recyclerView, recyclerView2;
-    private CardView btnAddKomoditas;
+    private CardView btnAddKomoditas, btnAddMarkets;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +53,7 @@ public class DashboardActivity extends AppCompatActivity {
         tvCountKomoditas = findViewById(R.id.tvcountproduct);
         tvCountMarket = findViewById(R.id.tvcountmarket);
         btnAddKomoditas = findViewById(R.id.btnaddkomoditas);
+        btnAddMarkets = findViewById(R.id.btnaddmarkets);
         btnLogout = findViewById(R.id.btnlogout);
         btnKomoditasLainnya = findViewById(R.id.tvlainnya);
         btnMarketLainnya = findViewById(R.id.tvlainnya2);
@@ -79,7 +77,14 @@ public class DashboardActivity extends AppCompatActivity {
 
         loadDataKomoditas();
 
-        btnAddKomoditas.setOnClickListener(v -> startActivity(new Intent(DashboardActivity.this, TambahKomoditasActivity.class)));
+        btnAddKomoditas.setOnClickListener(v -> {
+            startActivity(new Intent(DashboardActivity.this, TambahKomoditasActivity.class));
+            finish();
+        });
+        btnAddMarkets.setOnClickListener(v -> {
+            startActivity(new Intent(DashboardActivity.this, TambahMarketActivity.class));
+            finish();
+        });
         btnKomoditasLainnya.setOnClickListener(v -> {
             startActivity(new Intent(DashboardActivity.this, KomoditasActivity.class));
             finish();

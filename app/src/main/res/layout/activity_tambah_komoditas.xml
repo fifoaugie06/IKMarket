@@ -13,7 +13,7 @@
         android:paddingBottom="@dimen/activity_vertical_margin">
 
         <ImageView
-            android:id="@+id/imgKomoditas"
+            android:id="@+id/imgMarket"
             android:layout_width="match_parent"
             android:layout_height="185dp"
             android:scaleType="centerCrop"
@@ -26,10 +26,10 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:src="@drawable/ic_baseline_camera_alt_24"
-            app:layout_constraintBottom_toBottomOf="@+id/imgKomoditas"
-            app:layout_constraintEnd_toEndOf="@+id/imgKomoditas"
+            app:layout_constraintBottom_toBottomOf="@+id/imgMarket"
+            app:layout_constraintEnd_toEndOf="@+id/imgMarket"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/imgKomoditas" />
+            app:layout_constraintTop_toTopOf="@+id/imgMarket" />
 
 
         <com.google.android.material.textfield.TextInputLayout
@@ -39,18 +39,18 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/activity_vertical_margin"
             android:hint="@string/namaproduct"
-            app:layout_constraintTop_toBottomOf="@+id/imgKomoditas"
+            app:layout_constraintTop_toBottomOf="@+id/imgMarket"
             tools:layout_editor_absoluteX="8dp">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edtnamaproduct"
+                android:id="@+id/edtnamamarket"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <Spinner
-            android:id="@+id/spinnertype"
+            android:id="@+id/spinnermarketcategory"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="12dp"
@@ -65,10 +65,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:hint="@string/price"
-            app:layout_constraintTop_toBottomOf="@id/spinnertype">
+            app:layout_constraintTop_toBottomOf="@id/spinnermarketcategory">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edtharga"
+                android:id="@+id/edtfulladdress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="top"
@@ -87,7 +87,7 @@
             app:layout_constraintWidth_percent="0.85" />
 
         <ImageButton
-            android:id="@+id/btntambahquality"
+            android:id="@+id/btngetlonglat"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_marginLeft="@dimen/margin_padding_4dp"

@@ -1,11 +1,15 @@
 package com.example.ikmarket.services;
 
 import com.example.ikmarket.model.ResponseGeneral;
+import com.example.ikmarket.model.district.ResponseDistrict;
 import com.example.ikmarket.model.market.ResponseMarket;
+import com.example.ikmarket.model.marketcategory.ResponseMarketCategory;
 import com.example.ikmarket.model.product.ResponseProducts;
+import com.example.ikmarket.model.provincy.ResponseProvincy;
+import com.example.ikmarket.model.regency.ResponseRegency;
 import com.example.ikmarket.model.type.ResponseType;
 import com.example.ikmarket.model.unit.ResponseUnit;
-import com.example.ikmarket.quality.ResponseQuality;
+import com.example.ikmarket.model.quality.ResponseQuality;
 
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -37,7 +41,7 @@ public interface ApiService {
 
     @DELETE("products/{id}")
     Call<ResponseGeneral> deleteProducts(
-      @Path("id") String id
+            @Path("id") String id
     );
 
     @FormUrlEncoded
@@ -51,6 +55,38 @@ public interface ApiService {
 
     @DELETE("markets/{id}")
     Call<ResponseGeneral> deleteMarkets(
+            @Path("id") String id
+    );
+
+    @Multipart
+    @POST("markets")
+    Call<ResponseGeneral> createMarkets(
+            @Part MultipartBody.Part image,
+            @Part("image") RequestBody imagename,
+            @Part("name") RequestBody namamarket,
+            @Part("province_id") RequestBody provinceid,
+            @Part("regency_id") RequestBody regencyid,
+            @Part("district_id") RequestBody districtid,
+            @Part("fulladdress") RequestBody fulladdress,
+            @Part("longlat") RequestBody longlat,
+            @Part("open_at") RequestBody open_at,
+            @Part("description") RequestBody description,
+            @Part("market_category_id") RequestBody market_category_id
+    );
+
+    @GET("markets/category")
+    Call<ResponseMarketCategory> getMarketCategory();
+
+    @GET("provincy")
+    Call<ResponseProvincy> getProvincy();
+
+    @GET("provincy/{id}")
+    Call<ResponseRegency> getRegency(
+            @Path("id") String id
+    );
+
+    @GET("regency/{id}")
+    Call<ResponseDistrict> getDistrict(
             @Path("id") String id
     );
 

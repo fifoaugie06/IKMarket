@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == R.id.menu){
+        if (item.getItemId() == R.id.menu) {
             startActivity(new Intent(MainActivity.this, LoginActivity.class));
             finish();
         }

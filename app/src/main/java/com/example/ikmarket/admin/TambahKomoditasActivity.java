@@ -26,10 +26,9 @@ import android.widget.Toast;
 
 import com.example.ikmarket.R;
 import com.example.ikmarket.model.ResponseGeneral;
-import com.example.ikmarket.model.type.Datum;
 import com.example.ikmarket.model.type.ResponseType;
 import com.example.ikmarket.model.unit.ResponseUnit;
-import com.example.ikmarket.quality.ResponseQuality;
+import com.example.ikmarket.model.quality.ResponseQuality;
 import com.example.ikmarket.services.ApiClient;
 import com.example.ikmarket.services.ApiService;
 
@@ -65,14 +64,14 @@ public class TambahKomoditasActivity extends AppCompatActivity {
 
         getSupportActionBar().setTitle("Tambah Komoditas");
 
-        spinnerType = findViewById(R.id.spinnertype);
+        spinnerType = findViewById(R.id.spinnermarketcategory);
         spinnerQuality = findViewById(R.id.spinnerquality);
         spinnerUnit = findViewById(R.id.spinnerunit);
-        imgKomoditas = findViewById(R.id.imgKomoditas);
+        imgKomoditas = findViewById(R.id.imgMarket);
         btnTambahKomoditas = findViewById(R.id.tambahkomoditas);
-        edtNamaProduct = findViewById(R.id.edtnamaproduct);
-        edtHarga = findViewById(R.id.edtharga);
-        btnTambahQuality = findViewById(R.id.btntambahquality);
+        edtNamaProduct = findViewById(R.id.edtnamamarket);
+        edtHarga = findViewById(R.id.edtfulladdress);
+        btnTambahQuality = findViewById(R.id.btngetlonglat);
 
         dialog = new ProgressDialog(this);
         dialog.setCancelable(false);
@@ -84,31 +83,25 @@ public class TambahKomoditasActivity extends AppCompatActivity {
         loadSpinnerQuality();
         loadSpinnerUnit();
 
-        btnTambahQuality.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final Dialog dial;
-                dial = new Dialog(TambahKomoditasActivity.this);
-                dial.setContentView(R.layout.dialog_create_quality);
-                dial.show();
-                final Button btnTambah = dial.findViewById(R.id.btnadd);
-                final EditText edtName = dial.findViewById(R.id.edtname);
+        btnTambahQuality.setOnClickListener(v -> {
+            final Dialog dial;
+            dial = new Dialog(TambahKomoditasActivity.this);
+            dial.setContentView(R.layout.dialog_create_quality);
+            dial.show();
+            final Button btnTambah = dial.findViewById(R.id.btnadd);
+            final EditText edtName = dial.findViewById(R.id.edtname);
 
-                Window window = dial.getWindow();
-                window.setLayout(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            Window window = dial.getWindow();
+            window.setLayout(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 
-                btnTambah.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if (edtName.getText().length() == 0){
-                            edtName.setError("Wajib diisi");
-                        }else {
-                            tambahQuality(edtName.getText().toString());
-                            dial.dismiss();
-                        }
-                    }
-                });
-            }
+            btnTambah.setOnClickListener(v1 -> {
+                if (edtName.getText().length() == 0) {
+                    edtName.setError("Wajib diisi");
+                } else {
+                    tambahQuality(edtName.getText().toString());
+                    dial.dismiss();
+                }
+            });
         });
 
         imgKomoditas.setOnClickListener(v -> {
@@ -162,10 +155,10 @@ public class TambahKomoditasActivity extends AppCompatActivity {
         btnTambahKomoditas.setOnClickListener(v -> {
 //            Toast.makeText(TambahKomoditasActivity.this, selectTypeCode + " " + selectQualityCode + " " + selectUnitCode, Toast.LENGTH_LONG).show();
             if (mediaPath != null && selectTypeCode != 0 && selectQualityCode != 0 && selectUnitCode != 0
-                    && edtNamaProduct != null && edtHarga != null){
+                    && edtNamaProduct != null && edtHarga != null) {
                 tambahKomoditas(edtNamaProduct.getText().toString(), selectTypeCode, edtHarga.getText().toString(),
                         selectQualityCode, selectUnitCode);
-            }else {
+            } else {
                 Toast.makeText(TambahKomoditasActivity.this, "Isi Semua Data", Toast.LENGTH_SHORT).show();
             }
         });
@@ -178,7 +171,7 @@ public class TambahKomoditasActivity extends AppCompatActivity {
         apiService.createQuality(qualityname).enqueue(new Callback<ResponseGeneral>() {
             @Override
             public void onResponse(Call<ResponseGeneral> call, Response<ResponseGeneral> response) {
-                if (response.isSuccessful()){
+                if (response.isSuccessful()) {
                     Toast.makeText(TambahKomoditasActivity.this, "Kualitas Baru Ditambahkan", Toast.LENGTH_SHORT).show();
 
                     finish();
@@ -215,12 +208,12 @@ public class TambahKomoditasActivity extends AppCompatActivity {
         apiService.createProducts(fileToUpload, filename, namaKomoditas, selectType, harga, selectQuality, selectUnit).enqueue(new Callback<ResponseGeneral>() {
             @Override
             public void onResponse(Call<ResponseGeneral> call, Response<ResponseGeneral> response) {
-                if (response.isSuccessful()){
+                if (response.isSuccessful()) {
                     Toast.makeText(TambahKomoditasActivity.this, "Komoditas Baru Ditambahkan", Toast.LENGTH_SHORT).show();
 
                     startActivity(new Intent(TambahKomoditasActivity.this, DashboardActivity.class));
                     finish();
-                }else if (response.code() == 400){
+                } else if (response.code() == 400) {
                     Toast.makeText(TambahKomoditasActivity.this, "Gambar melebihi 2Mb", Toast.LENGTH_SHORT).show();
                 }
                 dialog.dismiss();
@@ -266,7 +259,7 @@ public class TambahKomoditasActivity extends AppCompatActivity {
         apiService.getUnit().enqueue(new Callback<ResponseUnit>() {
             @Override
             public void onResponse(Call<ResponseUnit> call, Response<ResponseUnit> response) {
-                if (response.isSuccessful()){
+                if (response.isSuccessful()) {
                     dialog.dismiss();
 
                     spinnerNameUnit = new ArrayList<>();
@@ -295,7 +288,7 @@ public class TambahKomoditasActivity extends AppCompatActivity {
         apiService.getQuality().enqueue(new Callback<ResponseQuality>() {
             @Override
             public void onResponse(Call<ResponseQuality> call, Response<ResponseQuality> response) {
-                if (response.isSuccessful()){
+                if (response.isSuccessful()) {
                     dialog.dismiss();
 
                     spinnerNameQuality = new ArrayList<>();
@@ -324,7 +317,7 @@ public class TambahKomoditasActivity extends AppCompatActivity {
         apiService.getType().enqueue(new Callback<ResponseType>() {
             @Override
             public void onResponse(Call<ResponseType> call, Response<ResponseType> response) {
-                if (response.isSuccessful()){
+                if (response.isSuccessful()) {
                     dialog.dismiss();
 
                     spinnerNameType = new ArrayList<>();

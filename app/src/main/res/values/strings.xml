@@ -24,4 +24,10 @@
     <string name="delete">Delete</string>
     <string name="tambah">Tambah</string>
     <string name="name_quality">Nama Kualitas</string>
+    <string name="namamarket">Nama Pasar</string>
+    <string name="fulladdress">Alamat Lengkap</string>
+    <string name="longlat">Longitude Latitude</string>
+    <string name="openat">Buka pada</string>
+    <string name="desc">Description</string>
+    <string name="tambahmarket">Tambah Pasar</string>
 </resources>

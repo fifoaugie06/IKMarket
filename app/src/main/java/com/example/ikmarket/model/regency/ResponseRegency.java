@@ -1,23 +1,18 @@
-package com.example.ikmarket.quality;
+package com.example.ikmarket.model.regency;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.util.List;
-
-public class ResponseQuality {
+public class ResponseRegency {
     @SerializedName("status")
     @Expose
     private Integer status;
     @SerializedName("message")
     @Expose
     private String message;
-    @SerializedName("data_count")
-    @Expose
-    private Integer dataCount;
     @SerializedName("data")
     @Expose
-    private List<DatumQuality> data = null;
+    private Data data;
 
     public Integer getStatus() {
         return status;
@@ -35,19 +30,11 @@ public class ResponseQuality {
         this.message = message;
     }
 
-    public Integer getDataCount() {
-        return dataCount;
-    }
-
-    public void setDataCount(Integer dataCount) {
-        this.dataCount = dataCount;
-    }
-
-    public List<DatumQuality> getData() {
+    public Data getData() {
         return data;
     }
 
-    public void setData(List<DatumQuality> data) {
+    public void setData(Data data) {
         this.data = data;
     }
 }

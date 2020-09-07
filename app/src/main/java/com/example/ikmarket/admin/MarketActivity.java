@@ -18,7 +18,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ikmarket.R;
-import com.example.ikmarket.adapter.MarketAdapter;
 import com.example.ikmarket.adapter.MarketAdminAdapter;
 import com.example.ikmarket.model.market.Datum;
 import com.example.ikmarket.model.market.ResponseMarket;
@@ -83,9 +82,9 @@ public class MarketActivity extends AppCompatActivity {
                 }
             }
 
-            if (dataMarketList.size() == 0){
+            if (dataMarketList.size() == 0) {
                 tvnull.setVisibility(View.VISIBLE);
-            }else {
+            } else {
                 tvnull.setVisibility(View.GONE);
             }
 
