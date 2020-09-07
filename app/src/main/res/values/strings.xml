@@ -34,4 +34,9 @@
     <string name="jenisolahan">Jenis Olahan</string>
     <string name="kualitas">Kualitas</string>
     <string name="terakhirupdate">Terakhir Update</string>
+    <string name="provinsi">Provinsi</string>
+    <string name="kabupatenkota">Kabupaten / Kota</string>
+    <string name="kecamatan">Kecamatan</string>
+    <string name="address">Alamat Lengkap</string>
+    <string name="deskripsi">Deskripsi</string>
 </resources>

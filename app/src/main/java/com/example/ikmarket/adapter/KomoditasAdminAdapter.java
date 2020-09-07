@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.ikmarket.KomoditasDetailActivity;
 import com.example.ikmarket.R;
 import com.example.ikmarket.model.ResponseGeneral;
 import com.example.ikmarket.model.product.Datum;
@@ -59,6 +61,19 @@ public class KomoditasAdminAdapter extends RecyclerView.Adapter<KomoditasAdminAd
         Glide.with(view.getContext())
                 .load(BASE_URL_STORAGE + responseProducts.get(position).getImage())
                 .into(imgkomoditas);
+
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(view.getContext(), KomoditasDetailActivity.class);
+
+            intent.putExtra("IMAGE", responseProducts.get(position).getImage());
+            intent.putExtra("NAME", responseProducts.get(position).getName());
+            intent.putExtra("PRICE", "Rp " + responseProducts.get(position).getPrice() + " / " + responseProducts.get(position).getUnit().getShortname());
+            intent.putExtra("TYPE", responseProducts.get(position).getType().getName());
+            intent.putExtra("QUALITY", responseProducts.get(position).getQuality().getName());
+            intent.putExtra("UPDATE", responseProducts.get(position).getUpdatedAt());
+
+            view.getContext().startActivity(intent);
+        });
 
         holder.itemView.setOnLongClickListener(v -> {
             final Dialog dial;

@@ -47,6 +47,7 @@ public class MarketFragment extends Fragment {
         tvnull = view.findViewById(R.id.tvnull);
         edtsearch = view.findViewById(R.id.edtsearch);
         recyclerView = view.findViewById(R.id.rvMarket);
+        recyclerView.setNestedScrollingEnabled(false);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(view.getContext());
         recyclerView.setLayoutManager(layoutManager);
 

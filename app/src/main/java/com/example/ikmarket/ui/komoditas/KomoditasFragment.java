@@ -48,6 +48,7 @@ public class KomoditasFragment extends Fragment {
         tvnull = view.findViewById(R.id.tvnull);
         edtsearch = view.findViewById(R.id.edtsearch);
         recyclerView = view.findViewById(R.id.rvKomoditas);
+        recyclerView.setNestedScrollingEnabled(false);
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(view.getContext(), 2);
         recyclerView.setLayoutManager(layoutManager);
 

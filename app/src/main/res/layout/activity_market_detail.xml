@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white"
-    tools:context=".KomoditasDetailActivity">
+    tools:context=".MarketDetailActivity">
 
     <ImageView
-        android:id="@+id/imgkomoditas"
+        android:id="@+id/imgMarkets"
         android:layout_width="match_parent"
         android:layout_height="260dp"
         android:background="#4D000000"
@@ -20,8 +20,8 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="@+id/imgkomoditas"
-        app:layout_constraintTop_toTopOf="@+id/imgkomoditas" />
+        app:layout_constraintBottom_toBottomOf="@+id/imgMarkets"
+        app:layout_constraintTop_toTopOf="@+id/imgMarkets" />
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -37,99 +37,146 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
-                android:id="@+id/tvNama"
+                android:textColor="@color/colorPrimary"
+                android:id="@+id/tvNamaMarket"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:fontFamily="@font/montserrat"
                 android:textAllCaps="true"
-                android:textColor="@color/colorPrimary"
                 android:textSize="22sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="Bawang Merah" />
+                tools:text="Pasar Lawang" />
 
             <TextView
-                android:id="@+id/tvHarga"
+                android:id="@+id/tvCategory"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_padding_4dp"
                 android:fontFamily="@font/montserrat"
-                app:layout_constraintEnd_toEndOf="@+id/tvNama"
-                app:layout_constraintStart_toStartOf="@+id/tvNama"
-                app:layout_constraintTop_toBottomOf="@+id/tvNama"
-                tools:text="5000 / Ons" />
+                app:layout_constraintEnd_toEndOf="@+id/tvNamaMarket"
+                app:layout_constraintStart_toStartOf="@+id/tvNamaMarket"
+                app:layout_constraintTop_toBottomOf="@+id/tvNamaMarket"
+                tools:text="Induk" />
 
             <TextView
-                android:id="@+id/jenis"
+                android:id="@+id/provinsi"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_padding_16dp"
                 android:fontFamily="@font/montserrat"
-                android:text="@string/jenisolahan"
+                android:text="@string/provinsi"
                 android:textColor="@color/colorPrimary"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                app:layout_constraintTop_toBottomOf="@+id/tvHarga" />
+                app:layout_constraintTop_toBottomOf="@+id/tvCategory" />
 
             <TextView
-                android:id="@+id/tvjenis"
+                android:id="@+id/tvProvinsi"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_padding_8dp"
                 android:fontFamily="@font/montserrat"
                 android:textAllCaps="true"
-                app:layout_constraintTop_toBottomOf="@+id/jenis"
-                tools:text="Pertanian" />
+                app:layout_constraintTop_toBottomOf="@+id/provinsi"
+                tools:text="JAWA TIMUR" />
 
             <TextView
-                android:id="@+id/kualitas"
+                android:id="@+id/Kabupatenkota"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_padding_16dp"
                 android:fontFamily="@font/montserrat"
-                android:text="@string/kualitas"
+                android:text="@string/kabupatenkota"
                 android:textColor="@color/colorPrimary"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                app:layout_constraintTop_toBottomOf="@+id/tvjenis"
+                app:layout_constraintTop_toBottomOf="@+id/tvProvinsi"
                 tools:layout_editor_absoluteX="16dp" />
 
             <TextView
-                android:id="@+id/tvkualitas"
+                android:id="@+id/tvKabupaten"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/montserrat"
                 android:lineSpacingExtra="3dp"
                 android:textAllCaps="true"
-                app:layout_constraintTop_toBottomOf="@+id/kualitas"
-                tools:text="Super" />
+                app:layout_constraintTop_toBottomOf="@+id/Kabupatenkota"
+                tools:text="MALANG" />
 
             <TextView
-                android:id="@+id/update"
+                android:id="@+id/Kecamatan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_padding_16dp"
                 android:fontFamily="@font/montserrat"
-                android:text="@string/terakhirupdate"
+                android:text="@string/kecamatan"
                 android:textColor="@color/colorPrimary"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                app:layout_constraintTop_toBottomOf="@+id/tvkualitas"
+                app:layout_constraintTop_toBottomOf="@+id/tvKabupaten"
                 tools:layout_editor_absoluteX="16dp" />
 
             <TextView
-                android:id="@+id/tvupdate"
+                android:textAllCaps="true"
+                android:id="@+id/tvKecamatan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/montserrat"
                 android:lineSpacingExtra="3dp"
-                app:layout_constraintTop_toBottomOf="@+id/update"
-                tools:text="20 OKTOBER 2020" />
+                app:layout_constraintTop_toBottomOf="@+id/Kecamatan"
+                tools:text="Lowokwaru" />
+
+            <TextView
+                android:id="@+id/address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_padding_16dp"
+                android:fontFamily="@font/montserrat"
+                android:text="@string/address"
+                android:textColor="@color/colorPrimary"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@+id/tvKecamatan"
+                tools:layout_editor_absoluteX="16dp" />
+
+            <TextView
+                android:id="@+id/tvAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/montserrat"
+                android:lineSpacingExtra="3dp"
+                app:layout_constraintTop_toBottomOf="@+id/address"
+                tools:text="Jl.Lawang setelah Flyover" />
+
+            <TextView
+                android:id="@+id/desc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_padding_16dp"
+                android:fontFamily="@font/montserrat"
+                android:text="@string/deskripsi"
+                android:textColor="@color/colorPrimary"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@+id/tvAddress"
+                tools:layout_editor_absoluteX="16dp" />
+
+            <TextView
+                android:id="@+id/tvdesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/montserrat"
+                android:lineSpacingExtra="3dp"
+                app:layout_constraintTop_toBottomOf="@+id/desc"
+                tools:text="Jl.Lawang setelah Flyover" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>

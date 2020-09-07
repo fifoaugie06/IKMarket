@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -16,31 +17,29 @@ import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import static com.example.ikmarket.services.ApiClient.BASE_URL_STORAGE;
 
-public class KomoditasDetailActivity extends AppCompatActivity {
-    private TextView tvNama, tvHarga, tvJenis, tvKualitas, tvTerakhirUpdate;
+public class MarketDetailActivity extends AppCompatActivity {
+    private TextView tvNama, tvProvincy, tvKabupaten, tvKecamatan, tvAddress, tvDeskripsi, tvCategory;
+    private ImageView imgMarket;
     private ProgressBar progressBar;
-    private ImageView imgKomoditas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_komoditas_detail);
+        setContentView(R.layout.activity_market_detail);
 
-        getSupportActionBar().setTitle("Detail Komoditas");
+        getSupportActionBar().setTitle("Detail Market");
 
-        tvNama = findViewById(R.id.tvNama);
-        tvHarga = findViewById(R.id.tvHarga);
-        tvJenis = findViewById(R.id.tvjenis);
-        tvKualitas = findViewById(R.id.tvkualitas);
-        tvTerakhirUpdate = findViewById(R.id.tvupdate);
+        tvNama = findViewById(R.id.tvNamaMarket);
+        tvProvincy = findViewById(R.id.tvProvinsi);
+        tvKabupaten = findViewById(R.id.tvKabupaten);
+        tvKecamatan = findViewById(R.id.tvKecamatan);
+        tvAddress = findViewById(R.id.tvAddress);
+        tvDeskripsi = findViewById(R.id.tvdesc);
         progressBar = findViewById(R.id.progress);
-        imgKomoditas = findViewById(R.id.imgkomoditas);
+        imgMarket = findViewById(R.id.imgMarkets);
+        tvCategory = findViewById(R.id.tvCategory);
 
         Bundle extras = getIntent().getExtras();
 
@@ -60,24 +59,15 @@ public class KomoditasDetailActivity extends AppCompatActivity {
                             return false;
                         }
                     })
-                    .into(imgKomoditas);
+                    .into(imgMarket);
 
             tvNama.setText(extras.getString("NAME"));
-            tvHarga.setText(extras.getString("PRICE"));
-            tvJenis.setText(extras.getString("TYPE"));
-            tvKualitas.setText(extras.getString("QUALITY"));
-
-            String strCurrentDate = extras.getString("UPDATE");
-            SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-            SimpleDateFormat outputFormat = new SimpleDateFormat("HH:mm - dd MMMM yyyy");
-            Date date = null;
-            try {
-                date = inputFormat.parse(strCurrentDate);
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-            String formattedDate = outputFormat.format(date);
-            tvTerakhirUpdate.setText(formattedDate);
+            tvCategory.setText(extras.getString("CATEGORY"));
+            tvProvincy.setText(extras.getString("PROVINSI"));
+            tvKabupaten.setText(extras.getString("KABUPATEN"));
+            tvKecamatan.setText(extras.getString("KECAMATAN"));
+            tvAddress.setText(extras.getString("ALAMAT"));
+            tvDeskripsi.setText(extras.getString("DESKRIPSI"));
         }
     }
 }

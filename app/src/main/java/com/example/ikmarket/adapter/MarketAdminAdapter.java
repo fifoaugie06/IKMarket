@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.ikmarket.MapsActivity;
+import com.example.ikmarket.MarketDetailActivity;
 import com.example.ikmarket.R;
 import com.example.ikmarket.model.ResponseGeneral;
 import com.example.ikmarket.model.market.Datum;
@@ -69,6 +70,21 @@ public class MarketAdminAdapter extends RecyclerView.Adapter<MarketAdminAdapter.
             intent.putExtra("NAMAPASAR", responseMarkets.get(position).getName());
             intent.putExtra("LATITUDE", splitKoordinat[0]);
             intent.putExtra("LONGITUDE", splitKoordinat[1]);
+            view.getContext().startActivity(intent);
+        });
+
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(view.getContext(), MarketDetailActivity.class);
+
+            intent.putExtra("IMAGE", responseMarkets.get(position).getImage());
+            intent.putExtra("NAME", responseMarkets.get(position).getName());
+            intent.putExtra("CATEGORY", responseMarkets.get(position).getMarketCategory().getName());
+            intent.putExtra("PROVINSI", responseMarkets.get(position).getProvincy().getName());
+            intent.putExtra("KABUPATEN", responseMarkets.get(position).getRegency().getName());
+            intent.putExtra("KECAMATAN", responseMarkets.get(position).getDistrict().getName());
+            intent.putExtra("ALAMAT", responseMarkets.get(position).getFulladdress());
+            intent.putExtra("DESKRIPSI", responseMarkets.get(position).getDescription());
+
             view.getContext().startActivity(intent);
         });
 
