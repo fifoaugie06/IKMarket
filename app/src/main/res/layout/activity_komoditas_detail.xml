@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    tools:context=".KomoditasDetailActivity">
+
+    <ImageView
+        android:id="@+id/imgKomoditas"
+        android:layout_width="match_parent"
+        android:layout_height="260dp"
+        android:background="#4D000000"
+        android:scaleType="centerCrop"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@+id/imgKomoditas"
+        app:layout_constraintTop_toTopOf="@+id/imgKomoditas" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="260dp"
+            android:background="@android:color/white"
+            android:padding="@dimen/margin_padding_16dp"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/tvNamaProduct"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:fontFamily="@font/montserrat"
+                android:textAllCaps="true"
+                android:textColor="#E6000000"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Bawang Merah" />
+
+            <TextView
+                android:id="@+id/tvHarga"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_padding_4dp"
+                android:fontFamily="@font/montserrat"
+                app:layout_constraintEnd_toEndOf="@+id/tvNamaProduct"
+                app:layout_constraintStart_toStartOf="@+id/tvNamaProduct"
+                app:layout_constraintTop_toBottomOf="@+id/tvNamaProduct"
+                tools:text="5000 / Ons" />
+
+            <TextView
+                android:id="@+id/JenisOlahan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_padding_16dp"
+                android:fontFamily="@font/montserrat"
+                android:text="@string/jenisolahan"
+                android:textColor="@color/colorPrimary"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@+id/tvHarga" />
+
+            <TextView
+                android:id="@+id/tvJenis"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_padding_8dp"
+                android:fontFamily="@font/montserrat"
+                android:textAllCaps="true"
+                app:layout_constraintTop_toBottomOf="@+id/JenisOlahan"
+                tools:text="Pertanian" />
+
+            <TextView
+                android:id="@+id/Kualitas"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_padding_16dp"
+                android:fontFamily="@font/montserrat"
+                android:text="@string/kualitas"
+                android:textColor="@color/colorPrimary"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@+id/tvJenis"
+                tools:layout_editor_absoluteX="16dp" />
+
+            <TextView
+                android:id="@+id/tvKualitas"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/montserrat"
+                android:lineSpacingExtra="3dp"
+                android:textAllCaps="true"
+                app:layout_constraintTop_toBottomOf="@+id/Kualitas"
+                tools:text="Super" />
+
+            <TextView
+                android:id="@+id/Update"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_padding_16dp"
+                android:fontFamily="@font/montserrat"
+                android:text="@string/terakhirupdate"
+                android:textColor="@color/colorPrimary"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@+id/tvKualitas"
+                tools:layout_editor_absoluteX="16dp" />
+
+            <TextView
+                android:id="@+id/tvTerakhirUpdate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/montserrat"
+                android:lineSpacingExtra="3dp"
+                app:layout_constraintTop_toBottomOf="@+id/Update"
+                tools:text="20 OKTOBER 2020" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,5 +1,6 @@
 package com.example.ikmarket.adapter;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.ikmarket.KomoditasDetailActivity;
 import com.example.ikmarket.R;
 import com.example.ikmarket.model.product.Datum;
 
@@ -43,6 +45,19 @@ public class KomoditasAdapter extends RecyclerView.Adapter<KomoditasAdapter.View
         Glide.with(view.getContext())
                 .load(BASE_URL_STORAGE + responseProducts.get(position).getImage())
                 .into(imgkomoditas);
+
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(view.getContext(), KomoditasDetailActivity.class);
+
+            intent.putExtra("IMAGE", responseProducts.get(position).getImage());
+            intent.putExtra("NAME", responseProducts.get(position).getName());
+            intent.putExtra("PRICE", "Rp " + responseProducts.get(position).getPrice() + " / " + responseProducts.get(position).getUnit().getShortname());
+            intent.putExtra("TYPE", responseProducts.get(position).getType().getName());
+            intent.putExtra("QUALITY", responseProducts.get(position).getQuality().getName());
+            intent.putExtra("UPDATE", responseProducts.get(position).getUpdatedAt());
+
+            view.getContext().startActivity(intent);
+        });
     }
 
     @Override

@@ -30,4 +30,8 @@
     <string name="openat">Buka pada</string>
     <string name="desc">Description</string>
     <string name="tambahmarket">Tambah Pasar</string>
+    <string name="title_grafik">Grafik</string>
+    <string name="jenisolahan">Jenis Olahan</string>
+    <string name="kualitas">Kualitas</string>
+    <string name="terakhirupdate">Terakhir Update</string>
 </resources>

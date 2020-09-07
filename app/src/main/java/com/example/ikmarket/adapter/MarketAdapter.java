@@ -63,7 +63,7 @@ public class MarketAdapter extends RecyclerView.Adapter<MarketAdapter.ViewHolder
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView tvname, tvopen, tvdesc, tvlihatlokasi, tvdetail;
+        private TextView tvname, tvopen, tvdesc, tvlihatlokasi;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -73,7 +73,6 @@ public class MarketAdapter extends RecyclerView.Adapter<MarketAdapter.ViewHolder
             tvopen = itemView.findViewById(R.id.tvopen);
             tvdesc = itemView.findViewById(R.id.tvdesc);
             tvlihatlokasi = itemView.findViewById(R.id.tvlihatlokasi);
-            tvdetail = itemView.findViewById(R.id.tvdetail);
         }
     }
 }

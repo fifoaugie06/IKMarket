@@ -27,6 +27,12 @@ public interface ApiService {
     @GET("products")
     Call<ResponseProducts> getProducts();
 
+    @GET("products/getByPriceMax")
+    Call<ResponseProducts> getProductsByPriceMax();
+
+    @GET("products/getByPriceMin")
+    Call<ResponseProducts> getProductsByPriceMin();
+
     @Multipart
     @POST("products")
     Call<ResponseGeneral> createProducts(

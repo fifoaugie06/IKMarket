@@ -1,5 +1,6 @@
 package com.example.ikmarket.admin;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -15,6 +16,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.InputType;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -68,6 +70,7 @@ public class TambahMarketActivity extends AppCompatActivity {
         setContentView(R.layout.activity_tambah_market);
 
         getSupportActionBar().setTitle("Tambah Markets");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         spinnerMarketCategory = findViewById(R.id.spinnermarketcategory);
         spinnerProvincy = findViewById(R.id.spinnerprovince);
@@ -382,5 +385,24 @@ public class TambahMarketActivity extends AppCompatActivity {
         } catch (Exception e) {
             Toast.makeText(this, "Something went wrong", Toast.LENGTH_LONG).show();
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            startActivity(new Intent(TambahMarketActivity.this, DashboardActivity.class));
+            finish();
+            overridePendingTransition(0, 0);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(TambahMarketActivity.this, DashboardActivity.class));
+        finish();
+        overridePendingTransition(0, 0);
+        super.onBackPressed();
     }
 }

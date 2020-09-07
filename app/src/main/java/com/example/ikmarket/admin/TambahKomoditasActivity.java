@@ -1,5 +1,6 @@
 package com.example.ikmarket.admin;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,6 +13,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
@@ -63,6 +65,7 @@ public class TambahKomoditasActivity extends AppCompatActivity {
         setContentView(R.layout.activity_tambah_komoditas);
 
         getSupportActionBar().setTitle("Tambah Komoditas");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         spinnerType = findViewById(R.id.spinnermarketcategory);
         spinnerQuality = findViewById(R.id.spinnerquality);
@@ -153,7 +156,6 @@ public class TambahKomoditasActivity extends AppCompatActivity {
         });
 
         btnTambahKomoditas.setOnClickListener(v -> {
-//            Toast.makeText(TambahKomoditasActivity.this, selectTypeCode + " " + selectQualityCode + " " + selectUnitCode, Toast.LENGTH_LONG).show();
             if (mediaPath != null && selectTypeCode != 0 && selectQualityCode != 0 && selectUnitCode != 0
                     && edtNamaProduct != null && edtHarga != null) {
                 tambahKomoditas(edtNamaProduct.getText().toString(), selectTypeCode, edtHarga.getText().toString(),
@@ -339,5 +341,24 @@ public class TambahKomoditasActivity extends AppCompatActivity {
                 Toast.makeText(TambahKomoditasActivity.this, "Jaringan Error", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            startActivity(new Intent(TambahKomoditasActivity.this, DashboardActivity.class));
+            finish();
+            overridePendingTransition(0, 0);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(TambahKomoditasActivity.this, DashboardActivity.class));
+        finish();
+        overridePendingTransition(0, 0);
+        super.onBackPressed();
     }
 }

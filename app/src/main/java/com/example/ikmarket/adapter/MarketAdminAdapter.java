@@ -145,7 +145,7 @@ public class MarketAdminAdapter extends RecyclerView.Adapter<MarketAdminAdapter.
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView tvname, tvopen, tvdesc, tvlihatlokasi, tvdetail;
+        private TextView tvname, tvopen, tvdesc, tvlihatlokasi;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
@@ -154,7 +154,6 @@ public class MarketAdminAdapter extends RecyclerView.Adapter<MarketAdminAdapter.
             tvopen = itemView.findViewById(R.id.tvopen);
             tvdesc = itemView.findViewById(R.id.tvdesc);
             tvlihatlokasi = itemView.findViewById(R.id.tvlihatlokasi);
-            tvdetail = itemView.findViewById(R.id.tvdetail);
         }
     }
 }
