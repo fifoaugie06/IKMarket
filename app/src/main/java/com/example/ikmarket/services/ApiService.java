@@ -93,6 +93,21 @@ public interface ApiService {
             @Part("market_category_id") RequestBody market_category_id
     );
 
+    @FormUrlEncoded
+    @PUT("markets/{id}")
+    Call<ResponseGeneral> updateMarkets(
+            @Path("id") String id,
+            @Field("name") String namamarket,
+            @Field("province_id") String provinceid,
+            @Field("regency_id") String regencyid,
+            @Field("district_id") String districtid,
+            @Field("fulladdress") String fulladdress,
+            @Field("longlat") String longlat,
+            @Field("open_at") String open_at,
+            @Field("description") String description,
+            @Field("market_category_id") String market_category_id
+    );
+
     @GET("markets/category")
     Call<ResponseMarketCategory> getMarketCategory();
 

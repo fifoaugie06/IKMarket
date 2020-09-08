@@ -23,6 +23,7 @@ import com.bumptech.glide.Glide;
 import com.example.ikmarket.MapsActivity;
 import com.example.ikmarket.MarketDetailActivity;
 import com.example.ikmarket.R;
+import com.example.ikmarket.admin.MarketUpdateActivity;
 import com.example.ikmarket.model.ResponseGeneral;
 import com.example.ikmarket.model.market.Datum;
 import com.example.ikmarket.services.ApiClient;
@@ -121,6 +122,26 @@ public class MarketAdminAdapter extends RecyclerView.Adapter<MarketAdminAdapter.
 
                 AlertDialog dlg = builder.create();
                 dlg.show();
+            });
+
+            btnUpdate.setOnClickListener(v12 -> {
+                dialog.dismiss();
+
+                Intent intent = new Intent(view.getContext(), MarketUpdateActivity.class);
+
+                intent.putExtra("ID", String.valueOf(responseMarkets.get(position).getId()));
+                intent.putExtra("NAMA", responseMarkets.get(position).getName());
+                intent.putExtra("CATEGORY", responseMarkets.get(position).getMarketCategory().getName());
+                intent.putExtra("PROVINCY", responseMarkets.get(position).getProvincy().getName());
+                intent.putExtra("REGENCY", responseMarkets.get(position).getRegency().getName());
+                intent.putExtra("DISTRICT", responseMarkets.get(position).getDistrict().getName());
+                intent.putExtra("ADDRESS", responseMarkets.get(position).getFulladdress());
+                intent.putExtra("LONGLAT", responseMarkets.get(position).getLonglat());
+                intent.putExtra("OPENAT", responseMarkets.get(position).getOpenAt());
+                intent.putExtra("DESC", responseMarkets.get(position).getDescription());
+
+                view.getContext().startActivity(intent);
+                ((Activity)view.getContext()).finish();
             });
 
             return false;
