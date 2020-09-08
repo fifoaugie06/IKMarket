@@ -39,4 +39,5 @@
     <string name="kecamatan">Kecamatan</string>
     <string name="address">Alamat Lengkap</string>
     <string name="deskripsi">Deskripsi</string>
+    <string name="updatekomoditas">Update Komoditas</string>
 </resources>

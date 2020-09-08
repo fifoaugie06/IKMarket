@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.ikmarket.KomoditasDetailActivity;
 import com.example.ikmarket.R;
+import com.example.ikmarket.admin.KomoditasUpdateActivity;
 import com.example.ikmarket.model.ResponseGeneral;
 import com.example.ikmarket.model.product.Datum;
 import com.example.ikmarket.services.ApiClient;
@@ -108,6 +109,22 @@ public class KomoditasAdminAdapter extends RecyclerView.Adapter<KomoditasAdminAd
 
                 AlertDialog dlg = builder.create();
                 dlg.show();
+            });
+
+            btnUpdate.setOnClickListener(v12 -> {
+                dial.dismiss();
+
+                Intent intent = new Intent(view.getContext(), KomoditasUpdateActivity.class);
+
+                intent.putExtra("ID", String.valueOf(responseProducts.get(position).getId()));
+                intent.putExtra("NAME", responseProducts.get(position).getName());
+                intent.putExtra("PRICE", String.valueOf(responseProducts.get(position).getPrice()));
+                intent.putExtra("TYPE", responseProducts.get(position).getType().getName());
+                intent.putExtra("QUALITY", responseProducts.get(position).getQuality().getName());
+                intent.putExtra("UNIT", responseProducts.get(position).getUnit().getFullname());
+
+                view.getContext().startActivity(intent);
+                ((Activity) view.getContext()).finish();
             });
 
             return false;

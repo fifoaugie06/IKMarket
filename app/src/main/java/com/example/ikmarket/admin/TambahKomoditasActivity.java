@@ -180,6 +180,8 @@ public class TambahKomoditasActivity extends AppCompatActivity {
                     overridePendingTransition(0, 0);
                     startActivity(getIntent());
                     overridePendingTransition(0, 0);
+                }else if (response.code() == 400){
+                    Toast.makeText(TambahKomoditasActivity.this, "Sudah Terdaftar", Toast.LENGTH_SHORT).show();
                 }
                 dialog.dismiss();
             }
